@@ -11,7 +11,8 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "livewire/livewire": "^3.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -20,7 +21,11 @@
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^11.5.3"
+        "phpunit/phpunit": "^11.5.3",
+        "realzone22/pengublade": "^1.0",
+        "realzone22/pengutables": "^1.0",
+        "wire-elements/modal": "^3.0",
+        "masmerise/livewire-toaster": "^2.8"
     },
     "autoload": {
         "psr-4": {
