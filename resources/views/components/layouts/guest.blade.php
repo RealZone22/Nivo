@@ -12,11 +12,12 @@
         }
     </style>
 
+    <link rel="icon" href="{{ asset('img/Logo.png') }}" type="image/x-icon">
+
     @vite('resources/css/app.css')
     @livewireStyles
-    <script src="{{ asset('modules/auth/js/webauthn.js') }}"></script>
 
-    <title>{{ ($title ? ' · ' : '') . config('app.name') }}</title>
+    <title>{{ ($title ?? '') . ' · ' . config('app.name') }}</title>
 </head>
 <body>
 
@@ -29,5 +30,6 @@
 @livewireScripts
 @livewire('wire-elements-modal')
 @vite('resources/js/app.js')
+<script src="{{ asset('js/logger.js') }}"></script>
 </body>
 </html>

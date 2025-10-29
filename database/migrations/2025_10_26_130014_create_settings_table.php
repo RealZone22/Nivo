@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('key');
-            $table->json('value')->nullable();
+            $table->text('value')->nullable();
             $table->enum('scope', ['system', 'user', 'secure']);
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->boolean('is_public')->default(false);
+            $table->boolean('public')->default(false);
             $table->boolean('encrypted')->default(false);
             $table->timestamps();
 
