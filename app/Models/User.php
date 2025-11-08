@@ -48,8 +48,8 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        if ($this->custom_avatar_url) {
-            return e($this->custom_avatar_url);
+        if (userSettings('custom_avatar_url', userId: $this->id)) {
+            return e(userSettings('custom_avatar_url', userId: $this->id));
         }
 
         $filePath = 'avatars/' . $this->id . '.png';

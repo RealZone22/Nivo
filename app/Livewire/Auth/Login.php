@@ -49,7 +49,7 @@ class Login extends Component
         if ($this->user->disabled) {
             Auth::logout();
             throw ValidationException::withMessages([
-                'username' => __('auth::login.user_disabled'),
+                'username' => __('auth.login.user_disabled'),
             ]);
         }
 
@@ -129,7 +129,7 @@ class Login extends Component
             }
 
             throw ValidationException::withMessages([
-                'twoFactorCode' => __('auth::login.recovery_code_invalid'),
+                'twoFactorCode' => __('auth.login.recovery_code_invalid'),
             ]);
         }
 
@@ -139,7 +139,7 @@ class Login extends Component
             redirect()->intended(route('dashboard'));
         }
         throw ValidationException::withMessages([
-            'twoFactorCode' => __('auth::login.two_factor_code_invalid'),
+            'twoFactorCode' => __('auth.login.two_factor_code_invalid'),
         ]);
     }
 

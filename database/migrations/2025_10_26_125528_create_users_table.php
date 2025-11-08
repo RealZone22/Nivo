@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('two_factor_enabled')->default(false);
             $table->text('two_factor_secret')->nullable();
             $table->boolean('disabled')->default(false);
+            $table->boolean('admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

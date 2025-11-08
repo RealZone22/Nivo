@@ -16,6 +16,11 @@ return [
     'auth' => [
         'rate_limit' => env('AUTH_RATE_LIMIT', '10'),
 
+        'profile' => [
+            'enable_change_avatar' => env('PROFILE_ENABLE_CHANGE_AVATAR', true),
+            'delete_account' => env('PROFILE_ENABLE_DELETE_ACCOUNT', true),
+        ],
+
         'oauth' => [
             'enabled' => env('OAUTH_ENABLED', false),
             'login_color' => env('OAUTH_LOGIN_COLOR', 'success'),

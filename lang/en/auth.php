@@ -25,6 +25,13 @@ return [
         'remember_me' => 'Remember Me',
         'forgot_password' => 'Forgot Your Password?',
         'user_not_found' => 'No account found with that username.',
+        'user_disabled' => 'This account has been disabled.',
+        'recovery_code_invalid' => 'The recovery code you entered is invalid.',
+        'two_factor_code_invalid' => 'The two-factor authentication code is invalid.',
+        'recovery_code' => 'Recovery Code',
+        'two_factor_code' => 'Two-Factor Code',
+        'use_two_factor' => 'Use Two-Factor Code',
+        'use_recovery_code' => 'Use Recovery Code',
 
         'buttons' => [
             'login' => 'Login',

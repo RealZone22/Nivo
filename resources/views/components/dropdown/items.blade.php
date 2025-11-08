@@ -1,5 +1,6 @@
 @props([
     'position' => 'bottom',
+    'align' => 'left',
 ])
 
 <div x-cloak
@@ -22,10 +23,18 @@
 
                 if ('{{ $position }}' === 'top') {
                     $el.style.bottom = (window.innerHeight - rect.top) + 'px';
-                    $el.style.left = rect.left + 'px';
+                    if ('{{ $align }}' === 'right') {
+                        $el.style.right = (window.innerWidth - rect.right) + 'px';
+                    } else {
+                        $el.style.left = rect.left + 'px';
+                    }
                 } else if ('{{ $position }}' === 'bottom') {
                     $el.style.top = rect.bottom + 'px';
-                    $el.style.left = rect.left + 'px';
+                    if ('{{ $align }}' === 'right') {
+                        $el.style.right = (window.innerWidth - rect.right) + 'px';
+                    } else {
+                        $el.style.left = rect.left + 'px';
+                    }
                 } else if ('{{ $position }}' === 'left') {
                     $el.style.top = rect.top + 'px';
                     $el.style.right = (window.innerWidth - rect.left) + 'px';

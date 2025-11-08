@@ -9,7 +9,7 @@
 
             <x-card class="space-y-4 mx-auto">
                 @if($user)
-                    <div class="rounded-xl border border-gray-500">
+                    <div class="rounded-radius border border-outline dark:border-outline-dark">
                         <div class="flex p-1 relative">
                             <img
                                 src="{{ $user->avatar() }}"
@@ -27,26 +27,58 @@
                         </x-alert>
                     </div>
                 @endif
-                <form class="space-y-4" wire:submit="attemptLogin">
-                    <x-input wire:model="username" wire:blur="checkIfUserExists($event.target.value)"
-                             label="{{ __('auth.login.username') }}" required
-                             autofocus/>
-                    <x-password wire:model="password" label="{{ __('auth.login.password') }}" required/>
+                @if($twoFactorEnabled)
+                    <form class="space-y-4" wire:submit="checkTwoFactorCode">
+                        @if($useRecoveryCode)
+                            <x-input wire:model="twoFactorCode" label="{{ __('auth.login.recovery_code') }}"
+                                     required
+                                     autofocus>
+                                <x-slot:hint>
+                                        <span class="hover:underline cursor-pointer"
+                                              wire:click="$set('useRecoveryCode', false)">
+                                            {{ __('auth.login.use_two_factor') }}
+                                        </span>
+                                </x-slot:hint>
+                            </x-input>
+                        @else
+                            <x-input wire:model="twoFactorCode" label="{{ __('auth.login.two_factor_code') }}"
+                                     required
+                                     autofocus>
+                                <x-slot:hint>
+                                        <span class="hover:underline cursor-pointer"
+                                              wire:click="$set('useRecoveryCode', true)">
+                                            {{ __('auth.login.use_recovery_code') }}
+                                        </span>
+                                </x-slot:hint>
+                            </x-input>
+                        @endif
 
-                    <x-checkbox wire:model="remember" label="{{ __('auth.login.remember_me') }}"/>
+                        <x-button class="w-full" type="submit" loading="checkTwoFactorCode">
+                            {{ __('auth.login.buttons.login') }}
+                        </x-button>
+                    </form>
+                @else
+                    <form class="space-y-4" wire:submit="attemptLogin">
+                        <x-input wire:model="username" wire:blur="checkIfUserExists($event.target.value)"
+                                 label="{{ __('auth.login.username') }}" required
+                                 autofocus/>
+                        <x-password wire:model="password" label="{{ __('auth.login.password') }}" required/>
 
-                    <x-button class="w-full" type="submit" loading="attemptLogin">
-                        {{ __('auth.login.buttons.login') }}
-                    </x-button>
-                </form>
+                        <x-checkbox wire:model="remember" label="{{ __('auth.login.remember_me') }}"/>
 
-                @if(settings('auth.oauth.enabled', config('settings.auth.oauth.enabled')) && !$twoFactorEnabled)
-                    <x-divider/>
+                        <x-button class="w-full" type="submit" loading="attemptLogin">
+                            {{ __('auth.login.buttons.login') }}
+                        </x-button>
+                    </form>
 
-                    <x-button class="w-full" link="{{ route('oauth.redirect', ['provider' => 'custom']) }}"
-                              :color="settings('auth.oauth.login_color', config('settings.auth.oauth.login_color'))">
-                        {{ settings('auth.oauth.login_text', config('settings.auth.oauth.login_text')) }}
-                    </x-button>
+                    @if(settings('auth.oauth.enabled', config('settings.auth.oauth.enabled')) && !$twoFactorEnabled)
+                        <x-divider/>
+
+                        <x-button class="w-full" link="{{ route('oauth.redirect', ['provider' => 'custom']) }}"
+                                  :color="settings('auth.oauth.login_color', config('settings.auth.oauth.login_color'))">
+                            {{ settings('auth.oauth.login_text', config('settings.auth.oauth.login_text')) }}
+                        </x-button>
+                    @endif
                 @endif
             </x-card>
 

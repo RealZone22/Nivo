@@ -1,11 +1,16 @@
 <?php
 
+use App\Livewire\Account\Profile;
 use App\Livewire\Auth\Login;
 use App\Livewire\Dashboard;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::group(['prefix' => 'account', 'as' => 'account.'], function () {
+        Route::get('profile', Profile::class)->name('profile');
+    });
+
     Route::get('/', Dashboard::class)->name('dashboard');
 });
 

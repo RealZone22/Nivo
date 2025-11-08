@@ -16,7 +16,7 @@ class CheckIfUserIsDisabled
         if (auth()->check() && auth()->user()->disabled) {
             auth()->logout();
 
-            Toaster::error(__('auth::login.user_disabled'));
+            Toaster::error(__('auth.login.user_disabled'));
 
             return redirect()->route('auth.login');
         }
